@@ -26,9 +26,9 @@ var passport        = require("passport"),
 
 
 // APP CONFIG
-mongoose.connect(process.env.DATABASEURL);
-// mongoose.connect("mongodb://localhost/book_list");
-// mongoose.connect("mongodb://Bansal:bansal@ds233320.mlab.com:33320/bookcamp");
+var url = process.env.DATABASEURL || "mongodb://localhost/book_list";
+mongoose.connect(url);
+
 
 
 app.set("view engine", "ejs"); 
