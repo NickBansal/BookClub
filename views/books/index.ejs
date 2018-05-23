@@ -19,7 +19,11 @@
                     <img class="img-responsive size" src="<%= data.image %>">
                     </a>
                     <div class="caption title">
-                        <strong><%= (data.name).substring(0,10) %>...</strong>
+                        <% if((data.name).length <= 12) { %>
+                            <strong><%= data.name %></strong>
+                        <% } else { %>
+                        <strong><%= (data.name).substring(0,12) %>...</strong>
+                        <% } %>
                     </div>
                 </div>
           
