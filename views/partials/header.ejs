@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BookCamp</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/app.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+
+
+    <div class="topnav navbar-expand-lg navbar-dark bg-secondary">
+        <div class="container">
+            <a class="navbar-brand" href="/books">
+                <i class="fa fa-book"></i>
+                BookClub
+            </a>
+            <% if (!currentUser) { %>
+                <a class="nav-link" href="/register">Sign Up</a>
+                <a class="nav-link" href="/login"><i class="fas fa-sign-in-alt"></i> Log In</a>
+            <% } else { %>
+                <a class="nav-link" href="#">Signed in as: <%= currentUser.username %></a>
+                <a class="nav-link" href="/logout">Log out <i class="fas fa-sign-out-alt"></i></a>
+            <% } %>
+            <div class="search-container">
+                <form action="/books" method="GET">
+                    <input type="text" placeholder="Search.." name="search">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+<div class="container">
+    <% if(error && error.length > 0){ %>
+            <div class="alert alert-danger" role="alert">
+                <%= error %>
+            </div>
+        <% } %>
+        <% if(success && success.length > 0){ %>
+            <div class="alert alert-success" role="alert">
+                <%= success %>
+            </div>
+        <% } %>
+</div>
+

@@ -1,0 +1,87 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row show">
+        <div class="col-md-3">
+            <div class="img-thumbnail text-center show-img">
+                <img class="book_image" src="<%= book.image %>">
+                <div class="writer"><strong><%= book.writer %></strong></div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-8">
+            <div class="scroll">
+                <h1><%= book.name %></h1>
+                <p><%= book.review %></p>
+                <p><em>Submitted by <%= book.author.username %> - <%= moment(book.created).fromNow() %></em></p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 text-center">
+            <h1>5 Stars</h1>
+            <!--<div class="icon">-->
+            <!--    <a href="http://www.amazon.com/"><i class="fab fa-amazon"></i></a>-->
+            <!--</div>-->
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-8">
+            <div class="del">
+                <% if (currentUser && book.author.id.equals(currentUser._id)) { %>
+                    <a href="/books/<%= book._id %>/edit"><button class="btn btn-secondary btn-sm">EDIT</button></a>
+                    <form class="delete" method="POST" action="/books/<%= book._id %>?_method=DELETE">
+                        <button class="btn btn-outline-secondary btn-sm">DELETE</button>    
+                    </form>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    <div class="row show">
+        <div class="col-md-1"></div>
+        
+        <div class="col-md-10">
+            <div class="card card-block bg-faded">
+                <a href="/books/<%= book._id %>/comments/new">
+                <button class="btn btn-dark btn-sm">NEW COMMENT</button>
+            </a>
+            <hr />
+            <% book.comments.forEach(function(data){ %>
+                <div class="row">
+                    <div class="container">
+                        <div class="col-md-12">
+                            <strong><%= data.author.username %></strong>
+                            <span class="float-right"><%= moment(data.created).fromNow() %></span>
+                            <p><%= data.text %></p>
+                            <% if (currentUser && data.author.id.equals(currentUser._id)) { %>
+                                <a href="/books/<%= book._id %>/comments/<%= data._id %>/edit">
+                                <button class="btn btn-secondary btn-xs">Edit</button>
+                                </a>
+                                <form class="delete" method="POST" action="/books/<%= book._id %>/comments/<%= data._id %>?_method=DELETE">
+                                    <button class="btn btn-outline-secondary btn-xs">DELETE</button>    
+                                </form>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>    
+            </div>
+        </div>
+        
+        <div class="col-md-1"></div>
+    </div>
+    
+    
+    
+ 
+    
+    
+    
+    
+</div>
+
+
+
+
+
+
+<% include ../partials/footer %>
