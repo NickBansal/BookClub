@@ -19,7 +19,14 @@ var bookSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Comment",
         },
-    ]
+    ],
+    ratings: [
+      {
+         type: mongoose.Schema.Types.ObjectId,
+         ref: "Rating"
+      }
+   ],
+   rating: { type: Number, default: 0 }
 });
 
 

@@ -11,7 +11,10 @@
         <div class="col-md-1"></div>
         <div class="col-md-8">
             <div class="scroll">
-                <h1><%= book.name %></h1>
+                <h1>
+                    <%= book.name %>
+                    
+                </h1>
                 <p><%= book.review %></p>
                 <p><em>Submitted by <%= book.author.username %> - <%= moment(book.created).fromNow() %></em></p>
             </div>
@@ -20,9 +23,9 @@
     <div class="row">
         <div class="col-md-3 text-center">
             <h1>5 Stars</h1>
-            <!--<div class="icon">-->
-            <!--    <a href="http://www.amazon.com/"><i class="fab fa-amazon"></i></a>-->
-            <!--</div>-->
+            <div class="icon">
+                <a href="http://www.amazon.com/"><i class="fab fa-amazon"></i></a>
+            </div>
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-8">

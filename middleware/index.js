@@ -1,6 +1,7 @@
 var Book        = require("../models/book"),
     flash       = require("connect-flash"),
-    Comment     = require("../models/comment");
+    Comment     = require("../models/comment"),
+    Rating      = require("../models/rating");
 
 
 
@@ -57,5 +58,19 @@ middlewareObj.isLoggedIn = function isLoggedIn(req, res, next){
     res.redirect("/login")
 };
 
+middlewareObj.checkRatingExists = function(req, res, next){
+  Book.findById(req.params.id).populate("ratings").exec(function(err, book){
+    if(err){
+      console.log(err);
+    }
+    for(var i = 0; i < book.ratings.length; i++ ) {
+      if(book.ratings[i].author.id.equals(req.user._id)) {
+        req.flash("success", "You already rated this!");
+        return res.redirect('/books/' + book._id);
+      }
+    }
+    next();
+  })
+}
 
 module.exports = middlewareObj;
